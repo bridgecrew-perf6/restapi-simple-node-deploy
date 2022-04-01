@@ -11,6 +11,7 @@ app.listen(port, () => {
 })
 
 /*
+npm install
 node src/index.js
 npm start
 
