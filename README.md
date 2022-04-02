@@ -3,7 +3,7 @@
 _Rest Api Node.js simple con aws_
 
 ## Comenzando 🚀
-_Estas instrucciones te permitirán obtener una copia del proyecto y como desplegarlo en **aws**._
+_Estas instrucciones te permitirán obtener una copia del proyecto y desplegarlo en **vm-aws**._
 
 ### Pre-requisitos 📋
 
