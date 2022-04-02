@@ -20,10 +20,21 @@ $ mkdir proyectos
 $ cd proyectos/
 $ git clone <URL_GIT_PROYECTO>
 $ cd <project_name>/
+$ cd vm-aws/
 ```
+
+_Conectarse a AWS_
+* Crear y descargar un **access-key** (*.csv) desde [security-credential](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials) (verificar región)
+* Crear **terraform.tfvars** con (*.csv):
+```
+# AWS Settings
+aws_access_key = "AKIAxxxxxxxxx"
+aws_secret_key = "xxxxxxxxxxxxx"
+aws_region     = "eu-west-1"
+```
+
 _Crear VM_
 ```
-$ cd vm-aws/
 $ terraform init
 $ terraform apply
 ```
@@ -56,12 +67,15 @@ _Desplegar_
 $ npm install
 $ npm start
 ```
-
+_Verificar_ \
+`http://<IP_PUBLICA_VM_AWS>:3000/`
+`https://<IP_PUBLICA_VM_AWS>:3000/`
 
 ### **Instalación de Pre-Requisitos**
 ***
 * ### Instalar AWS CLI
 ```
+$ sudo apt-get update
 $ cd Downloads/
 $ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 
@@ -72,18 +86,18 @@ $ aws --version
 
 * ### Instalar Terraform
 ```
+$ sudo apt-get update
 $ curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 
 $ sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 
-$ sudo apt update
 $ sudo apt install terraform
 $ terraform --version
 ```
 
 * ### Install Git
 ```
-$ sudo apt update
+$ sudo apt-get update
 $ sudo apt install git
 $ git --version
 ```
@@ -91,12 +105,12 @@ $ git --version
 * ### Instalar NVM
 _NVM: Node Version Manager_
 ```
+$ sudo apt-get update
 $ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
-$ source ~/.bashrc    (actualizar el servidor)
+$ source ~/.bashrc    (actualiza el servidor)
 $ nvm --version
 
-$ sudo apt update
 $ nvm install --lts
 $ node -v
 $ npm -v
