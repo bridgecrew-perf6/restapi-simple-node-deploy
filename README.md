@@ -32,6 +32,7 @@ aws_access_key = "AKIAxxxxxxxxx"
 aws_secret_key = "xxxxxxxxxxxxx"
 aws_region     = "eu-west-1"
 ```
+* Eliminar **access-key** de [security-credential](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials) **(solo al finalzar)**
 
 _Crear VM_
 ```
