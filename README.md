@@ -43,7 +43,7 @@ $ chmod 400 <name-key-pair>.pem
 ```
 ### **Desplegar en VM**
 ***
-
+_[Instalar NVM](#instalar-nvm)_\
 _Clonar Proyecto_
 ```
 $ mkdir proyectos
