@@ -14,13 +14,20 @@ _Estas instrucciones te permitirán obtener una copia del proyecto y desplegarlo
 
 ### **Creación de VM en AWS**
 ***
-_Clonar el proyecto y ejecutar:_
+_Clonar Proyecto_
+```
+$ mkdir proyectos
+$ cd proyectos/
+$ git clone <URL_GIT_PROYECTO>
+$ cd <project_name>/
+```
+_Crear VM_
 ```
 $ cd vm-aws/
 $ terraform init
 $ terraform apply
 ```
-_Eliminar la VM ejecutar **(obs: solo al finalzar)**:_
+_Eliminar VM **(solo al finalzar)**_
 ```
 $ terraform destroy
 ```
@@ -44,7 +51,7 @@ $ cd proyectos/
 $ git clone <URL_GIT_PROYECTO>
 $ cd <project_name>/
 ```
-_Instalar dependencias y desplegar_
+_Desplegar_
 ```
 $ npm install
 $ npm start
