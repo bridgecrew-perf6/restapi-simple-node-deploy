@@ -26,6 +26,7 @@ resource "aws_security_group" "aws-linux-sg" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
     description = "Allow incoming SSH connections"
   }
   ingress {
@@ -33,6 +34,7 @@ resource "aws_security_group" "aws-linux-sg" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
     description = "Allow incoming HTTP connections"
   }
   ingress {
@@ -40,6 +42,7 @@ resource "aws_security_group" "aws-linux-sg" {
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
     description = "Allow incoming HTTPS connections"
   }
   ingress {
@@ -47,6 +50,7 @@ resource "aws_security_group" "aws-linux-sg" {
     to_port     = 3000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
     description = "Allow incoming Port connections"
   }  
   egress {
@@ -54,6 +58,7 @@ resource "aws_security_group" "aws-linux-sg" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
   }
 }
 

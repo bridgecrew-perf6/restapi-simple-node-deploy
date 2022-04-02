@@ -69,8 +69,7 @@ $ npm install
 $ npm start
 ```
 _Verificar_ \
-`http://<IP_PUBLICA_VM_AWS>:3000/` \
-`https://<IP_PUBLICA_VM_AWS>:3000/`
+`http://<IP_PUBLICA_VM_AWS>:3000/`
 
 ### **Instalación de Pre-Requisitos**
 ***
