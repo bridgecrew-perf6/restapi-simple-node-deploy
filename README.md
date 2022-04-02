@@ -101,5 +101,4 @@ $ nvm install --lts
 $ node -v
 $ npm -v
 $ npx -v
-
 ```
