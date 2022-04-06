@@ -7,10 +7,12 @@
     - [Instalar Git](#instalar-git)
     - [Instalar NVM](#instalar-nvm)
     - [Instalar Docker](#instalar-docker)
+    - [Instalar Minikube](#instalar-minikube)
     - [Instalar AWS CLI](#instalar-aws-cli)
     - [Instalar Terraform](#instalar-terraform)
   - [**Desplegar en Local**](#desplegar-en-local)
   - [**Desplegar en Docker**](#desplegar-en-docker)
+  - [**Desplegar en Minikube**](#desplegar-en-minikube)
   - [**Desplegar en AWS**](#desplegar-en-aws)
   - [**Comandos Git**](#comandos-git)
     - [Iniciar Proyecto](#iniciar-proyecto)
@@ -18,10 +20,9 @@
     - [Verficar Estado](#verficar-estado)
     - [Revisar Log](#revisar-log)
 
-
-****
+***
 ## **Intro**
-_Este es un ejemplo para desplegar un proyecto simple de Rest Api (Node.js) en un entorno Linux con diferentes VMs_
+_Este es un ejemplo para desplegar un proyecto simple de Rest Api (Node.js) en un entorno Linux (Ubuntu) con diferentes VMs_
 
 ***
 ## **Pre-requisitos**
@@ -85,6 +86,38 @@ $ npx -v
   $ docker-compose --version
   ```
 
+### Instalar Minikube
+_Minikube te permite cerear un clúster local de Kubernetes_\
+[Link Minikube](https://www.linuxtechi.com/how-to-install-minikube-on-ubuntu/)
+
+* _Instalar minikube_
+  ```
+  $ sudo apt update && sudo apt upgrade
+  $ sudo apt install -y curl wget apt-transport-https
+
+  $ wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+
+  $ sudo cp minikube-linux-amd64 /usr/local/bin/minikube
+  $ sudo chmod +x /usr/local/bin/minikube
+  $ minikube version
+  ```
+* _Instalar Kubectl utility_
+  ```
+  $ curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+
+  $ chmod +x kubectl
+  $ sudo mv kubectl /usr/local/bin/
+  $ kubectl version -o yaml
+  ```
+* _Iniciar Minikube_
+  ```
+  $ minikube start
+  ```
+* _Detener Minikube_
+  ```
+  $ minikube stop
+  ```
+
 ### Instalar AWS CLI
 [Link](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 ```
@@ -109,7 +142,7 @@ $ sudo apt install terraform
 $ terraform --version
 ```
 
-****
+***
 ## **Desplegar en Local**
 _[Instalar NVM](#instalar-nvm)_\
 _[Clonar Proyecto](#clonar-proyecto)_\
@@ -121,7 +154,7 @@ $ npm start
 _Verificar_ \
 `http://<IP_PUBLICA_VM>:3000/`
 
-****
+***
 ## **Desplegar en Docker**
 * Utilizando **Dockerfile**\
   _Ejecutar_
@@ -158,11 +191,44 @@ _Verificar_ \
   $ docker-compose -f <FILENAME.yml> stop
   ```
   _Eliminar_ ⚠️
-    ```
+  ```
   $ docker-compose -f <FILENAME.yml> down
   ```
+***
+## **Desplegar en Minikube**
+[Instalar Docker](#instalar-docker)\
+[Instalar Minikube](#instalar-minikube)\
+_Iniciar Minikube_
+```
+$ minikube start
+$ eval $(minikube docker-env)
+```
+_Desplegar_
+```
+$ docker build -t node-server .
+$ kubectl apply -f k8s-deploy.yml
+```
+_Inspeccionar_
+```
+$ kubectl get pods
+$ kubectl get service
+$ kubectl get all
+$ minikube ip
+```
+_Obtener URL_
+```
+$ minikube service <SERVICE_NAME> --url
+```
+_Verificar_\
+`http://<IP_MINIKUBE>:32000/`
 
-****
+_Eliminar_ ⚠️
+```
+$ kubectl delete -f k8s-deploy.yml 
+$ minikube stop
+```
+
+***
 ## **Desplegar en AWS**
 _[Clonar Proyecto](#clonar-proyecto)_\
 _Ir a la carpeta_
@@ -204,7 +270,7 @@ _Desplegar proyecto_
 * Utilizar los comandos de [**Desplegar en Local**](#desplegar-localmente)
 
 
-****
+***
 ## **Comandos Git**
 ### Iniciar Proyecto
 ```

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      role: node
+  template:
+    metadata:
+      labels:
+        role: node   # label de la ip del Cluster
+    spec:
+      containers:
+      - name: node
+        image: node-server:latest
+        imagePullPolicy: Never  # solo para imagen local
+        ports:
+        - containerPort: 3000 # puerto definido en la imagen
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node
+spec:
+  # minikube only exposes ports 30000-32767
+  type: NodePort # Expone el servicio en la IP de cada nodo en un puerto estatico
+  selector:
+    role: node   # Deployment: label de la ip del Cluster
+  ports:
+  - port: 5000  # puerto que expone el Service dentro del Cluster
+    targetPort: 3000  # puerto proveniente del containerPort
+    nodePort: 32000 # NodePort: if not specified, the system will generate a nodePort value
+
+
+
+# minikube start
+# eval $(minikube docker-env)
+# docker build -t node-server .
+# kubectl apply -f k8s-deploy.yml
+# kubectl get pods
+# kubectl get all
+# kubectl get service
+# ej. 5000:30994/TCP 
+# minikube service <SERVICE_NAME> --url
+# curl http://(minikube ip):(NodePort)
+
+# kubectl delete -f k8s-deploy.yml 
+# minikube stop
+# undo env -> crear nueva terminal
